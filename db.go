@@ -29,6 +29,9 @@ func NewDatabaseUnitOfWork(db TransactionalDb) UnitOfWork {
 	return &uow
 }
 
+// compile-time check that databaseUnitOfWork always implements the UnitOfWork interface
+var _ UnitOfWork = (*databaseUnitOfWork)(nil)
+
 type databaseUnitOfWork struct {
 	mtx        sync.Mutex
 	dbConn     TransactionalDb
